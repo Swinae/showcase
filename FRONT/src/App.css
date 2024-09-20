@@ -1,5 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap');
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+main {
+  padding: 1rem 0;
+}
+
+header > *,
+main > *,
+footer > *{
+  padding:  0rem 5%;
+}
+
+header {
+  padding-top: 1rem;
+}
+
+h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+}
+
+.logo {
+  font-family: "Oswald", sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  color: #2A9D8F;
 }

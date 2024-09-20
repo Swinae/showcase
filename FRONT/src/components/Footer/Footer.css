@@ -1,0 +1,34 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: #2A9D8F;
+    color: white;
+    font-weight: 300;
+    padding-top: 1rem;
+    font-size: 12px;
+}
+
+ul,
+.links-logo {
+    display: flex;
+}
+
+.socials {
+    gap: 1rem;
+    font-size: 24px;
+}
+
+.links {
+    gap: 1rem;
+}
+
+.links-logo {
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer .logo {
+    color: white;
+    font-size: 20px;
+}
