@@ -1,17 +1,16 @@
 article {
     display: flex;
     flex-direction: column;
-    background-color: #1E1E1E;
+    background-color: var(--second-bg-color);
     padding: 1rem;
     border-radius: 16px;
     gap: 0.5rem;
-    color: white;
+    color: var(--second-font-color);
     max-width: 400px;
 }
 
 article img {
     border-radius: 14px;
-
 }
 
 article p {

@@ -2,11 +2,12 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    background-color: #2A9D8F;
-    color: white;
+    background-color: var(--main-bg-color);
+    color: var(--second-font-color);
     font-weight: 300;
     padding-top: 1rem;
     font-size: 12px;
+    margin-top: auto;
 }
 
 ul,
@@ -29,6 +30,6 @@ ul,
 }
 
 footer .logo {
-    color: white;
+    color: var(--second-font-color);
     font-size: 20px;
 }
