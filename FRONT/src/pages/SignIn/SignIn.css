@@ -1,0 +1,41 @@
+h2 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+}
+
+input {
+    padding: 1rem 1rem;
+    font-family: 'Open Sans', sans-serif;
+    border: none;
+    border-radius: 2rem;
+    background-color: rgba(199, 199, 199, 0.164);
+}
+
+.link {
+    color: var(--third-font-color);
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: relative;
+}
+
+.error {
+    color: red;
+}
+
+#toggle-password-icon {
+    position: absolute;
+    right: 5%;
+    top: 70%;
+    transform: translateY(-50%); 
+    cursor: pointer;
+}

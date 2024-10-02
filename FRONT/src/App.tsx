@@ -6,6 +6,7 @@ import { HomePage } from './pages/Home/Home'
 import { Footer } from './components/Footer/Footer'
 import { MytripsPage } from './pages/Mytrips/Mytrips'
 import { TripDetailsPage } from './pages/TripDetails/TripDetails'
+import { SignInPage } from './pages/SignIn/SignIn'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 					<Route path='/' element={<HomePage />}/>
 					<Route path='/mytrips' element={<MytripsPage />}></Route>
 					<Route path='/mytrips/:tripId' element={<TripDetailsPage />}></Route>
+					<Route path='/signin' element={<SignInPage />}></Route>
 				</Routes>
 			</main>
 

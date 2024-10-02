@@ -17,7 +17,7 @@ export function HomePage() {
 
             <section className="hero">
                 <p>Plan your first trip now !</p>
-                <ButtonType1 ButtonText={"Let's go"} />
+                <ButtonType1 ButtonText={"Let's go"} ButtonRedirection={'/signin'} />
             </section>
 
             <section className="presentation">

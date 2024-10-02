@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { ButtonType1 } from "../Buttons/ButtonType1";
 
 export function NavbarTop() {
@@ -6,10 +7,10 @@ export function NavbarTop() {
     return (
         <>
             <nav>
-                <a className="logo" href="">Trippr</a>
+                <NavLink to={'/'} className={'logo'}>Trippr</NavLink> 
                 <ul>
-                    <li><a href="">Sign up</a></li>
-                    <li><ButtonType1 ButtonText={"Login"}/></li>
+                    <li><NavLink to={'/register'}>Register</NavLink></li>
+                    <li><ButtonType1 ButtonText={"Sign in"} ButtonRedirection={"/signin"}/></li>
                 </ul>
             </nav>
         </>
