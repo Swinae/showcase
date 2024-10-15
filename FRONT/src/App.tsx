@@ -7,6 +7,7 @@ import { Footer } from './components/Footer/Footer'
 import { MytripsPage } from './pages/Mytrips/Mytrips'
 import { TripDetailsPage } from './pages/TripDetails/TripDetails'
 import { SignInPage } from './pages/SignIn/SignIn'
+import { RegisterPage } from './pages/Register/Register'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
 					<Route path='/mytrips' element={<MytripsPage />}></Route>
 					<Route path='/mytrips/:tripId' element={<TripDetailsPage />}></Route>
 					<Route path='/signin' element={<SignInPage />}></Route>
+					<Route path='/register' element={<RegisterPage />}></Route>
 				</Routes>
 			</main>
 

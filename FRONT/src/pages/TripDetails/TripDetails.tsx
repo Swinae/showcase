@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getTripInfo } from "../../services/api/Trips"
 import { Trip } from "../../services/interfaces/Trip"
-import { DatePicker } from "../../components/DateSelector/DatePicker"
+import { DatePicker } from "../../components/DatePicker/DatePicker"
 
 export function TripDetailsPage() {
 

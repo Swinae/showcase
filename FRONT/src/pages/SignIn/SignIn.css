@@ -35,7 +35,8 @@ input {
 #toggle-password-icon {
     position: absolute;
     right: 5%;
-    top: 70%;
+    top: 50%;
     transform: translateY(-50%); 
     cursor: pointer;
+    color: rgba(150, 150, 150, 0.747);
 }

@@ -1,12 +1,10 @@
-import './SignIn.css'
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import { SignIn } from '../../services/api/SignIn';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { Register } from '../../services/api/Register';
 
-export function SignInPage() {
-
+export function RegisterPage() {
     const navigate = useNavigate()
 
     const [showPassword, setShowPassword] = useState(false)
@@ -14,7 +12,7 @@ export function SignInPage() {
         setShowPassword(!showPassword)
     }
 
-    const signInSchema = yup.object({
+    const registerSchema = yup.object({
         email: yup.string()
             .email('Invalid email address')
             .required('Email is required'),
@@ -22,35 +20,34 @@ export function SignInPage() {
         password: yup.string()
             .min(12, 'Password must be at least 12 characters')
             .required('Password is required'),
+
+        confirm: yup.string().oneOf([yup.ref('password')], 'Password and confirmation do not match').required('Please confirm your password')
     })
 
     const { handleSubmit, handleChange, values, errors } = useFormik({
         initialValues: {
             email: '',
             password: '',
+            confirm: ''
         },
-        validationSchema: signInSchema,
+
+        validationSchema: registerSchema,
         onSubmit: async values => {
             try {
-                const userExist = await SignIn(values)
-                if (userExist !== undefined) {
-                    console.log('user exist');
-                    navigate("/mytrips")
-
-                } else {
-                    console.log("can't find user");
-
+                const userIsCreated = await Register(values)   
+                if (userIsCreated !== undefined) {
+                    navigate('/signin')
                 }
+
             } catch (error) {
                 console.error(error)
             }
-
         }
     })
 
     return (
         <>
-            <h2>Sign in to Trippr</h2>
+            <h2>Create a new Trippr account</h2>
 
             <form onSubmit={handleSubmit}>
                 <div className="input">
@@ -80,10 +77,26 @@ export function SignInPage() {
                 </div>
                 {errors.password && <small className="error">{errors.password}</small>}
 
-                <button type="submit">Sign in</button>
+                <div className="input">
+                    <input
+                        placeholder='Confirm password'
+                        type={showPassword ? 'text' : 'password'}
+                        name="confirm"
+                        id="confirm-input"
+                        onChange={handleChange}
+                        value={values.confirm} />
+                    <i
+                        id='toggle-password-icon'
+                        className={showPassword ? "fa-regular fa-eye" : "fa-regular fa-eye-slash"}
+                        onClick={togglePasswordVisibility}>
+                    </i>
+                </div>
+                {errors.confirm && <small className="error">{errors.confirm}</small>}
+
+                <button type="submit">Register</button>
             </form>
 
-            <p>Don't have an account ? <NavLink to={"/register"} className={"link"}>Register now !</NavLink></p>
+            <p>Already have an account ? <NavLink to={"/signin"} className={"link"}>Sign in</NavLink></p>
         </>
     )
 }
