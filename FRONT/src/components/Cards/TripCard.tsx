@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom'
-import './TripCard.css'
 
 export function TripCard(props: any) {
     const { tripInfo } = props
@@ -17,7 +16,27 @@ export function TripCard(props: any) {
 
     return (
         <NavLink to={`/mytrips/${tripInfo.id}`}>
-            <article>
+            <article
+                css={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    backgroundColor: 'var(--second-bg-color)',
+                    padding: '1rem',
+                    borderRadius: 16,
+                    gap: '0.5rem',
+                    color: 'var(--second-font-color)',
+                    maxWidth: 400,
+                    
+                    '& img': {
+                        borderRadius: 14,
+                    },
+
+                    '& p': {
+                        color: '#cecccc',
+                        fontSize: 12,
+                        fontWeight: 'lighter',
+                    }
+            }}>
                 <img src={tripInfo.img} alt="test" />
                 <h4>{tripInfo.title}</h4>
                 <p>{start_date} - {end_date}</p>

@@ -1,3 +1,17 @@
 {
-    "plugins": ["@emotion"]
-}
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": 
+    [
+        "@emotion",
+      [
+        "@emotion/babel-plugin",
+        {
+          "autoLabel": "dev-only",
+          "jsxImportSource": "@emotion/react"
+        }
+      ]
+    ]
+  }

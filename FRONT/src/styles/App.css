@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&display=swap');
 
-/* GENERAL */
+
+
+/* ---GENERAL--- */
 * {
   padding: 0;
   margin: 0;
@@ -33,7 +35,7 @@ body {
 
 }
 
-/* target root div inside body */
+/* Target root div inside body */
 #root {
   min-height: 100vh;
   display: flex;
@@ -57,7 +59,7 @@ header {
   padding-top: 1rem;
 }
 
-/* NAVBAR */
+/* --NAVBAR-- */
 nav {
   display: flex;
   justify-content: space-between;
@@ -68,6 +70,24 @@ nav ul {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+/* --FOOTER-- */
+footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: var(--main-bg-color);
+  color: var(--second-font-color);
+  font-weight: 300;
+  padding-top: 1rem;
+  font-size: 12px;
+  margin-top: auto;
+}
+
+footer .logo {
+  color: var(--second-font-color);
+  font-size: 20px;
 }
 
 

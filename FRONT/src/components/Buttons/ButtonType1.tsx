@@ -1,4 +1,4 @@
-/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 
 interface ButtonProps {
@@ -15,14 +15,15 @@ export function ButtonType1(props: ButtonProps) {
 
     return (
         <button
-            css={{
-                backgroundColor: '#2A9D8F',
-                border: 'none',
-                borderRadius: '6px',
-                color: 'white',
-                padding: '0.3rem 1.5rem',
-                font: 'inherit',
-                }}
+            css={css`
+                background-color: #2A9D8F;
+                border: none;
+                border-radius: 6px;
+                color: white;
+                padding: 0.3rem 1.5rem;
+                font-family: inherit;`
+                }
+                
             onClick={redirection}>
 
             {ButtonText}

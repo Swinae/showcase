@@ -13,6 +13,8 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "typeRoots": ["src/styles/theme", "./node_modules/@types"],
 
     /* Linting */
     "strict": true,
