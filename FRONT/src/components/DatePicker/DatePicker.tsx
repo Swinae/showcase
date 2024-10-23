@@ -1,4 +1,4 @@
-import './DatePicker.css'
+import { css } from '@emotion/react';
 
 interface DatePickerProps {
     dates: {
@@ -23,9 +23,28 @@ export function DatePicker(props: DatePickerProps) {
     const start_date = formatDate(dates.start_date)
     const end_date = formatDate(dates.end_date)
 
+
+    /* ---STYLE--- */
+    const datePickerStyle = css`
+        padding: 1.5rem 0rem;
+        box-shadow: 0px 0px 15px -2px rgba(155, 155, 155, 0.40);
+        border-radius: 3rem;
+        text-align: center;
+        font-family: 'Oswalt', sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+
+        & input {
+            border: none;
+            font-family: 'Oswalt', sans-serif;
+            font-size: 20px;
+            font-weight: 500; 
+        }
+    `
+
     return (
         <div>
-            <div className='date-picker'>
+            <div className='date-picker' css={datePickerStyle}>
                 <i className="fa-solid fa-calendar-days"></i> 
                 <input className='date-picker-input' type="date" value={start_date}/> <i className="fa-solid fa-arrow-right"></i> <input className='date-picker-input' type="date" value={end_date}/>
             </div>

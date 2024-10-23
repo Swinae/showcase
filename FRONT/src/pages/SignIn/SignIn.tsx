@@ -4,6 +4,7 @@ import { SignIn } from '../../services/api/SignIn';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { css } from '@emotion/react';
+import { ButtonType2 } from '../../components/Buttons/ButtonType2';
 
 export function SignInPage() {
 
@@ -124,10 +125,10 @@ export function SignInPage() {
                 </div>
                 {errors.password && <small className="error">{errors.password}</small>}
 
-                <button type="submit">Sign in</button>
+                <ButtonType2 ButtonText='Sign in' />
             </form>
 
-            <p>Don't have an account ? <NavLink to={"/register"} className={"link"}>Register now !</NavLink></p>
+            <small>Don't have an account ? <NavLink to={"/register"} className={"link-orange"}>Register now !</NavLink></small>
         </>
     )
 }

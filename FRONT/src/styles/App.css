@@ -20,6 +20,17 @@ h1 {
   font-size: 40px;
 }
 
+h2 {
+  font-size: 40px;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 500;
+  }
+  
+h4 {
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
 button {
   cursor: pointer;
 }
@@ -58,6 +69,12 @@ footer > *{
 header {
   padding-top: 1rem;
 }
+
+
+.link-orange {
+  color: var(--third-font-color); 
+}
+
 
 /* --NAVBAR-- */
 nav {

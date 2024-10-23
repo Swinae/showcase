@@ -1,12 +1,40 @@
-import './Home.css'
 import { ButtonType1 } from "../../components/Buttons/ButtonType1";
+import { css } from '@emotion/react';
 
 export function HomePage() {
 
+    const introStyle = css`
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    `
+
+    const heroStyle = css`
+        background-color: var(--second-bg-color);
+        color: var(--second-font-color);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+
+        & p {
+            font-size: 20px;
+            font-weight: 300;
+        }
+    `
+    
+    const presentationStyle = css`
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    `
 
     return (
         <>
-            <section className="intro">
+            <section className="intro" css={introStyle}>
                 <h1>Welcome to Trippr !</h1>
                 <p>
                     Trippr is a plannification tool for your trips around the world. <br />
@@ -15,14 +43,14 @@ export function HomePage() {
                 </p>
             </section>
 
-            <section className="hero">
+            <section className="hero" css={heroStyle}>
                 <p>Plan your first trip now !</p>
                 <ButtonType1 ButtonText={"Let's go"} ButtonRedirection={'/signin'} />
             </section>
 
-            <section className="presentation">
+            <section className="presentation" css={presentationStyle}>
                 <h2>How does it work ?</h2>
-                <ol>
+                <ol css={presentationStyle}>
                     <li>
                         <h4>Create a trip</h4>
                         <img src="../../Trip card.png" alt="Exemple of a trip card" />

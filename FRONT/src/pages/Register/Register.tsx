@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Register } from '../../services/api/Register';
 import { css } from '@emotion/react';
+import { ButtonType2 } from '../../components/Buttons/ButtonType2';
 
 export function RegisterPage() {
     const navigate = useNavigate()
@@ -35,7 +36,7 @@ export function RegisterPage() {
         validationSchema: registerSchema,
         onSubmit: async values => {
             try {
-                const userIsCreated = await Register(values)   
+                const userIsCreated = await Register(values)
                 if (userIsCreated !== undefined) {
                     navigate('/signin')
                 }
@@ -50,7 +51,7 @@ export function RegisterPage() {
     const title = css`
         text-align: center;
     `
-    
+
     const formStyle = css`
         display: flex;
         flex-direction: column;
@@ -138,10 +139,10 @@ export function RegisterPage() {
                 </div>
                 {errors.confirm && <small className="error">{errors.confirm}</small>}
 
-                <button type="submit">Register</button>
+                <ButtonType2 ButtonText='Register' />
             </form>
 
-            <p>Already have an account ? <NavLink to={"/signin"} className={"link"}>Sign in</NavLink></p>
+            <small>Already have an account ? <NavLink to={"/signin"} className={"link-orange"}>Sign in</NavLink></small>
         </>
     )
 }
