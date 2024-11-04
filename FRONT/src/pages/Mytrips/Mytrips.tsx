@@ -24,6 +24,7 @@ export function MytripsPage() {
     return (
         <>
             <h1>My trips</h1>
+            
             <section>
                 <ul 
                     css={css`

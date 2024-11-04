@@ -59,11 +59,5 @@ export function DatePicker(props: DatePickerProps) {
                 moveRangeOnFirstSelection={false}
             />
         </>
-        /*      <div>
-                 <div className='date-picker' css={datePickerStyle}>
-                     <i className="fa-solid fa-calendar-days"></i> 
-                     <input className='date-picker-input' type="date" value={start_date}/> <i className="fa-solid fa-arrow-right"></i> <input className='date-picker-input' type="date" value={end_date}/>
-                 </div>
-             </div> */
     )
 }

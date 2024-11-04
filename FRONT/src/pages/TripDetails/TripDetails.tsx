@@ -68,37 +68,50 @@ export function TripDetailsPage() {
     `
 
     const dateDisplayStyle = css`
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        width: 100%;
-        color: #1d1d1d;
-        
-        & input {
+        .date-display-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            width: 100%;
+            color: #1d1d1d;
+            border: none;
+            border-radius: 4rem;
+            box-shadow: 0px 0px 6px 5px rgba(0,0,0,0.10);
+            padding: 1rem 0;
             font-size: 20px;
+        }
+
+        & input {
+            font-size: inherit;
             border: none;
             outline: none;
             cursor: pointer;
             width: 100px;
             color: #1d1d1d; //TO CHECK: COLOR IS NOT TAKEN INTO ACCOUNT FOR SOME REASON
+            text-align: center;
         }
     `
 
     return (
         <>
-            <h1>{tripInfo?.title}</h1>
-            <div className="date-display-wrapper" css={dateDisplayStyle}>
-                <input readOnly type="text" placeholder={tripDates ? `${newStartDate}` : 'Start'} onClick={toggleCalandarVisibility} alt="Select the starting date of your trip" />
-                <i className="fa-solid fa-arrow-right"></i>
-                <input readOnly type="text" placeholder={tripDates ? `${newEndDate}` : 'End'} onClick={toggleCalandarVisibility} alt="Select the ending date of your trip" />
+            <div css={dateDisplayStyle}>
+                <h1>{tripInfo?.title}</h1>
+                <div className="date-display-wrapper">
+                    <i className="fa-solid fa-calendar-days"></i>
+                    <input readOnly type="text" placeholder={tripDates ? `${newStartDate}` : 'Start'} onClick={toggleCalandarVisibility} alt="Select the starting date of your trip" />
+                    <i className="fa-solid fa-arrow-right"></i>
+                    <input readOnly type="text" placeholder={tripDates ? `${newEndDate}` : 'End'} onClick={toggleCalandarVisibility} alt="Select the ending date of your trip" />
+                </div>
+
+                <div css={calandarDisplay}>
+                    <div className={showCalandar ? "displayBlock" : "displayNone"}>
+                        <DatePicker newTripDates={handleTripDates} />
+                    </div>
+                </div>
+                <p>{tripInfo?.location}</p>
             </div>
 
-            <div css={calandarDisplay}>
-                <div className={showCalandar ? "displayBlock" : "displayNone"}>
-                    <DatePicker newTripDates={handleTripDates} />
-                </div>
-            </div>
-            <p>{tripInfo?.location}</p>
         </>
     )
 }
