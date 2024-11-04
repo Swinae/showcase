@@ -17,22 +17,9 @@ interface DateRange {
 export function DatePicker(props: DatePickerProps) {
 
     const { newTripDates } = props
+    
     /* ---STYLE--- */
     const datePickerStyle = css`
-        .rdrDateRangePickerWrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .rdrCalendarWrapper.rdrDateRangeWrapper{
-            flex: 1;
-        }
-
-        .rdrMonth {
-            width: 100%;
-        }
-        
         .rdrDefinedRangesWrapper {
             display: none
         }

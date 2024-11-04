@@ -55,12 +55,15 @@ export function TripDetailsPage() {
 
     /*---STYLE--- */
     const calandarDisplay = css`
+        text-align: center;
+
         .displayNone {
             display: none;
         }
 
         .displayBlock {
             display: block;
+
         }
     `
 
