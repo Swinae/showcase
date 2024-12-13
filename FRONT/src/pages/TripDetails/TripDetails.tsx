@@ -4,6 +4,9 @@ import { getTripInfo } from "../../services/api/Trips"
 import { Trip } from "../../services/interfaces/Trip"
 import { DatePicker } from "../../components/DatePicker/DatePicker"
 import { css } from "@emotion/react"
+import { ButtonType3 } from "../../components/Buttons/ButtonType3"
+import { NavbarBottom } from "../../components/NavbarBottom/NavbarBottom"
+import GoogleMap from "../../components/Map/Map"
 
 interface TripDates {
     selection: {
@@ -95,8 +98,8 @@ export function TripDetailsPage() {
 
     return (
         <>
+            <h1>{tripInfo?.title}</h1>
             <div css={dateDisplayStyle}>
-                <h1>{tripInfo?.title}</h1>
                 <div className="date-display-wrapper">
                     <i className="fa-solid fa-calendar-days"></i>
                     <input readOnly type="text" placeholder={tripDates ? `${newStartDate}` : 'Start'} onClick={toggleCalandarVisibility} alt="Select the starting date of your trip" />
@@ -109,8 +112,20 @@ export function TripDetailsPage() {
                         <DatePicker newTripDates={handleTripDates} />
                     </div>
                 </div>
-                <p>{tripInfo?.location}</p>
             </div>
+
+            <ButtonType3 ButtonText="Create a new activity" />
+            <section className="trip-details">
+                <GoogleMap />
+            </section>
+            <div css={css`
+                    margin-top: auto;
+                `}>
+                <NavbarBottom />
+            </div>
+
+
+
 
         </>
     )

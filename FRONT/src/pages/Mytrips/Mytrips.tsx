@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { getUserTrips } from "../../services/api/Trips"
 import { TripCard } from "../../components/Cards/TripCard";
 import { css } from '@emotion/react';
+import { ButtonType3 } from "../../components/Buttons/ButtonType3";
 
 export function MytripsPage() {
     const [trips, setTrips] = useState([])
@@ -24,9 +25,9 @@ export function MytripsPage() {
     return (
         <>
             <h1>My trips</h1>
-            
+            <ButtonType3 ButtonText="New trip" />
             <section>
-                <ul 
+                <ul
                     css={css`
                         display: flex;
                         flex-wrap: wrap;
