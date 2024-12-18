@@ -56,7 +56,27 @@ export function TripDetailsPage() {
         setShowCalandar(!showCalandar)
     }
 
+    const [showMap, setShowMap] = useState(false)
+    const handleMapDisplay = () => {
+        setShowMap(!showMap)
+    }
+
     /*---STYLE--- */
+    const generalDisplay = css`
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-height: 90vh;
+        gap: 1rem;
+    `
+
+    const contentDisplay = css`
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        gap: 1rem;
+    `
+
     const calandarDisplay = css`
         text-align: center;
 
@@ -96,37 +116,60 @@ export function TripDetailsPage() {
         }
     `
 
+    const mapDisplay = css`
+    display: ${showMap ? "block" : "none"};
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    `
+
+    const navbarBottomStyle = css`
+        position: relative;
+        z-index: 10;
+    `
+
     return (
         <>
-            <h1>{tripInfo?.title}</h1>
-            <div css={dateDisplayStyle}>
-                <div className="date-display-wrapper">
-                    <i className="fa-solid fa-calendar-days"></i>
-                    <input readOnly type="text" placeholder={tripDates ? `${newStartDate}` : 'Start'} onClick={toggleCalandarVisibility} alt="Select the starting date of your trip" />
-                    <i className="fa-solid fa-arrow-right"></i>
-                    <input readOnly type="text" placeholder={tripDates ? `${newEndDate}` : 'End'} onClick={toggleCalandarVisibility} alt="Select the ending date of your trip" />
-                </div>
+            <div css={generalDisplay}>
+                {/* INFO BLOCK THAT IS SWITCHED WITH THE MAP ON BUTTON TOGGLE */}
+                <div className="content" css={contentDisplay}>
+                    <h1>{tripInfo?.title}</h1>
 
-                <div css={calandarDisplay}>
-                    <div className={showCalandar ? "displayBlock" : "displayNone"}>
-                        <DatePicker newTripDates={handleTripDates} />
+                    <div css={dateDisplayStyle}>
+                        <div className="date-display-wrapper">
+                            <i className="fa-solid fa-calendar-days"></i>
+                            <input readOnly type="text" placeholder={tripDates ? `${newStartDate}` : 'Start'} onClick={toggleCalandarVisibility} alt="Select the starting date of your trip" />
+                            <i className="fa-solid fa-arrow-right"></i>
+                            <input readOnly type="text" placeholder={tripDates ? `${newEndDate}` : 'End'} onClick={toggleCalandarVisibility} alt="Select the ending date of your trip" />
+                        </div>
+                        <div css={calandarDisplay}>
+                            <div className={showCalandar ? "displayBlock" : "displayNone"}>
+                                <DatePicker newTripDates={handleTripDates} />
+                            </div>
+                        </div>
                     </div>
+
+                    <ButtonType3 ButtonText="Create a new activity" />
+
+                    <ul>
+                        <li>Activities</li>
+                        {/* LOOP TO DISPLAY LIST OF ACTIVITIES */}
+                    </ul>
+                </div>
+
+                {/*DISPLAY GOOGLE MAP */}
+                <div className="map-wrapper" css={mapDisplay}>
+                    <GoogleMap />
+                </div>
+
+
+                {/* DISPLAY NAVIGATION BAR TO TOGGLE BETWEEN MAP AND LIST */}
+                <div className="navbar-bottom" css={navbarBottomStyle}>
+                    <NavbarBottom mapDisplayStatus={handleMapDisplay}/>
                 </div>
             </div>
-
-            <ButtonType3 ButtonText="Create a new activity" />
-            <section className="trip-details">
-                <GoogleMap />
-            </section>
-            <div css={css`
-                    margin-top: auto;
-                `}>
-                <NavbarBottom />
-            </div>
-
-
-
-
         </>
     )
 }

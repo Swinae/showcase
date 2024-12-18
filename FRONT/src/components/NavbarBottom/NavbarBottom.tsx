@@ -1,6 +1,12 @@
 import { css } from "@emotion/react"
+import { useState } from "react"
 
-export function NavbarBottom() {
+interface NavbarBottomProps {
+    mapDisplayStatus: (isDisplayed: boolean) => void;
+}
+export function NavbarBottom({ mapDisplayStatus }: NavbarBottomProps) {
+
+    const [isDisplayed, setIsDisplayed] = useState(false);
 
     const NavbarBottomStyle = css`
         display: flex;
@@ -9,19 +15,23 @@ export function NavbarBottom() {
         gap: 5rem;
 
         li > button {
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--third-font-color);
             background: none;
             border: none;
-            
         }
     `
+
+    const toggleDisplay = () => {
+        setIsDisplayed(!isDisplayed)
+        mapDisplayStatus(isDisplayed)
+    }
 
     return (
         <>
             <ul className="navbar-wrapper" css={NavbarBottomStyle}>
-                <li><button><i className="fa-solid fa-list"></i></button></li>
-                <li><button><i className="fa-solid fa-map"></i></button></li>
+                <li><button onClick={toggleDisplay}><i className="fa-solid fa-list"></i></button></li>
+                <li><button onClick={toggleDisplay}><i className="fa-solid fa-map"></i></button></li>
             </ul>
         </>
     )
