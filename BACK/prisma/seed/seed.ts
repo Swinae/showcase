@@ -1,8 +1,8 @@
-import { PrismaClient } from '@prisma/client';
 import { faker } from '@faker-js/faker';
 import { ObjectId } from "mongodb";
+import { PrismaService} from '../prisma.service'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaService();
 
 async function generateUsers() {
     // Generate 20 users

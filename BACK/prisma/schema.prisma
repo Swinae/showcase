@@ -32,7 +32,7 @@ model Trip {
   endDate       DateTime
   author        User     @relation(fields: [authorId], references: [id], name: "UserTrips")
   authorId      String   @db.ObjectId
-  activities    Activity[]
+  activities    Activity[]                                                                                                                                                                                                                                                                                                                                                                                                                  
   createdAt     DateTime @default(now())
   updatedAt     DateTime @default(now())
 }

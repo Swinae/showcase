@@ -1,17 +1,26 @@
-import { user } from "../fakers/userFaker";
-import { SignUpData } from "../interfaces/SignUp";
+import useApi from '../hooks/useAPI';
+import { RegisterData } from '../interfaces/Register';
 
-export async function Register(newUser: SignUpData) {
-    const userList = user
-    const newUserId = userList.length + 1
-    
-    const newUserData = {
-        id: newUserId,
-        email: newUser.email,
-        password: newUser.password
+const api = useApi()
+
+interface RegisterRequest {
+    email: string,
+    password: string
+}
+
+export async function register(registerForm: RegisterData):Promise<boolean | undefined> {
+    const userCredentials: RegisterRequest = {
+        email: registerForm.email,
+        password: registerForm.password
     }
     
-    userList.push(newUserData)
+    
+    const response = await api.post('auth/register', userCredentials)
 
-    return newUserData;
+    if (response.status === 201 && response.data.user) {
+        return true
+    
+    } else {
+        console.error('User creation failed')
+    }
 }

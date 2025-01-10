@@ -8,8 +8,9 @@ const useApi = () => {
 
     // Création d'une instance Axios
     const api = axios.create({
-        baseURL: "https://jsonplaceholder.typicode.com/",
-        headers: headers,
+        baseURL: import.meta.env.VITE_APP_PROD,
+        
+        headers
     });
 
     // Juste avant l'envoi de la requète
