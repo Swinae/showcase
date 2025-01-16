@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { Register } from '../../services/api/Register';
+import { register } from '../../services/api/Register';
 import { css } from '@emotion/react';
 import { ButtonType2 } from '../../components/Buttons/ButtonType2';
 
@@ -36,7 +36,7 @@ export function RegisterPage() {
         validationSchema: registerSchema,
         onSubmit: async values => {
             try {
-                const userIsCreated = await Register(values)
+                const userIsCreated = await register(values)
                 if (userIsCreated !== undefined) {
                     navigate('/signin')
                 }

@@ -6,29 +6,37 @@ import { User } from '@prisma/client';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prisma: PrismaService) { }
+	constructor(private readonly prisma: PrismaService) { }
 
-  async create(data: CreateUserDto): Promise<User> {
-    return this.prisma.user.create({ data });
-  }
+	async create(data: CreateUserDto): Promise<User> {
+		return this.prisma.user.create({ data });
+	}
 
-  findAll() {
-    return this.prisma.user.findMany();
-  }
+	async findAll() : Promise<User[]> {
+		return this.prisma.user.findMany();
+	}
 
-  findByEmail(email: string) {
-    return this.prisma.user.findUnique({
-      where: {
-        email
-      }
-    })
-  }
+	async findByEmail(email: string): Promise<User> {
+		return this.prisma.user.findUnique({
+			where: {
+				email
+			}
+		})
+	}
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
+	async findById(id: string): Promise<User> {
+		return this.prisma.user.findUnique({
+			where: {
+				id
+			}
+		})
+	}
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
-  }
+	update(id: number, updateUserDto: UpdateUserDto) {
+		return `This action updates a #${id} user`;
+	}
+
+	remove(id: number) {
+		return `This action removes a #${id} user`;
+	}
 }
