@@ -8,8 +8,7 @@ import { User } from '@prisma/client';
 @Controller('auth')
 export class AuthController {
     constructor(
-        private readonly authService: AuthService, 
-        private readonly usersService: UsersService
+        private readonly authService: AuthService
     ) { }
 
     @Post('register')
