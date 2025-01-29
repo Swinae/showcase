@@ -32,10 +32,8 @@ export class AuthService {
         }
     }
 
-    async singIn(body: SigninAuthDto) {
+    async signIn(body: SigninAuthDto) {
         try {
-
-            //Those steps can be grouped inside a specific function validateUser
             const user = await this.usersService.findByEmail(body.email)
             const isMatchingPwd = await this.comparePwd(body.password, user.password)
 
@@ -43,7 +41,16 @@ export class AuthService {
                 throw new HttpException('Incorrect email or password', HttpStatus.FORBIDDEN)
             }
 
+            const payload =
+            {
+                sub: user.id,
+                username: user.email,
+                role: user.role
+            };
 
+            return {
+                access_token: await this.jwtService.signAsync(payload),
+            };
 
 
         } catch (error) {

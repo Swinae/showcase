@@ -4,6 +4,7 @@ import { UsersService } from 'src/users/users.service';
 import { RegisterAuthDto } from './dto/register-auth.dto';
 import { SigninAuthDto } from './dto/signin-auth.dto';
 import { User } from '@prisma/client';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -16,9 +17,10 @@ export class AuthController {
         return this.authService.register(body)
     }
 
+    @Public()
     @Post('signin')
     async signIn(@Body() body: SigninAuthDto) {
-        return this.authService.singIn(body)
+        return this.authService.signIn(body)
     }
 }
 
