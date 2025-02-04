@@ -52,9 +52,13 @@ export class AuthService {
                 expiresIn: '7d'
             })
 
-            const updatedUser = this.usersService.update(user.id, {refreshToken})
+            const updatedUser = await this.usersService.update(user.id, {refreshToken})
 
-            return { updatedUser, accessToken, refreshToken }
+            return { 
+                user: updatedUser, 
+                access_token: accessToken, 
+                refresh_token: refreshToken 
+            }
 
 
         } catch (error) {
