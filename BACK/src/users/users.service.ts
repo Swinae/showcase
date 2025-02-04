@@ -12,7 +12,7 @@ export class UsersService {
 		return this.prisma.user.create({ data });
 	}
 
-	async findAll() : Promise<User[]> {
+	async findAll(): Promise<User[]> {
 		return this.prisma.user.findMany();
 	}
 
@@ -32,9 +32,15 @@ export class UsersService {
 		})
 	}
 
-	update(id: number, updateUserDto: UpdateUserDto) {
-		return `This action updates a #${id} user`;
-	}
+	async update(id: string, data: any) {
+		return this.prisma.user.update({
+			where: {
+				id
+			},
+			data
+		})
+	};
+
 
 	remove(id: number) {
 		return `This action removes a #${id} user`;

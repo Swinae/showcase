@@ -1,15 +1,27 @@
 import { Injectable } from '@nestjs/common';
 import { CreateTripDto } from './dto/create-trip.dto';
 import { UpdateTripDto } from './dto/update-trip.dto';
+import { PrismaService } from 'prisma/prisma.service';
 
 @Injectable()
 export class TripsService {
+  constructor(private readonly prisma: PrismaService) {}
+
+
   create(createTripDto: CreateTripDto) {
     return 'This action adds a new trip';
   }
 
-  findAll() {
-    return `This action returns all trips`;
+  async findUserTrips(userId: string) {
+    return this.prisma.trip.findMany({
+      where: {
+        authorId: userId
+      }
+    });
+  }
+
+  async findAll() {
+    return this.prisma.trip.findMany()
   }
 
   findOne(id: number) {

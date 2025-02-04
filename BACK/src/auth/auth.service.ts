@@ -32,14 +32,8 @@ export class AuthService {
         }
     }
 
-    async signIn(body: SigninAuthDto) {
+    async signIn(user: any) {
         try {
-            const user = await this.usersService.findByEmail(body.email)
-            const isMatchingPwd = await this.comparePwd(body.password, user.password)
-
-            if (!user || !isMatchingPwd) {
-                throw new HttpException('Incorrect email or password', HttpStatus.FORBIDDEN)
-            }
 
             const payload =
             {
@@ -48,14 +42,43 @@ export class AuthService {
                 role: user.role
             };
 
-            return {
-                access_token: await this.jwtService.signAsync(payload),
-            };
+            const accessToken = await this.jwtService.signAsync(payload, {
+                secret: process.env.ACCESS_TOKEN,
+                expiresIn: '15m',
+            })
+
+            const refreshToken = await this.jwtService.signAsync(payload, {
+                secret: process.env.REFRESH_TOKEN,
+                expiresIn: '7d'
+            })
+
+            const updatedUser = this.usersService.update(user.id, {refreshToken})
+
+            return { updatedUser, accessToken, refreshToken }
 
 
         } catch (error) {
             throw (error)
         }
+    }
+
+    
+
+    async validateUser(username: string, pass: string): Promise<any> {
+        const user = await this.usersService.findByEmail(username);
+
+        if (!user) {
+            throw new HttpException('Incorrect email or password', HttpStatus.FORBIDDEN)
+        }
+
+        const isMatchingPwd = await this.comparePwd(pass, user.password);
+
+        if (!isMatchingPwd) {
+            throw new HttpException('Incorrect email or password', HttpStatus.FORBIDDEN)
+        }
+
+        const { password, ...result } = user;
+        return result;
     }
 
     async hashPwd(password: string): Promise<string> {
@@ -64,5 +87,9 @@ export class AuthService {
 
     async comparePwd(formPwd: string, dbHashedPwd: string): Promise<Boolean> {
         return await bcrypt.compare(formPwd, dbHashedPwd)
+    }
+
+    async compareRefreshToken(reqToken: string, userToken: string): Promise<Boolean> {
+        return await bcrypt.compare(reqToken, userToken)
     }
 }

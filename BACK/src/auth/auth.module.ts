@@ -6,26 +6,25 @@ import { PrismaModule } from 'prisma/prisma.module';
 import { JwtModule } from '@nestjs/jwt';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guard';
+import { LocalStrategy } from './local.strategy';
+import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from './jwt.strategy';
+import { JwtRefreshStrategy } from './jwtRefresh.strategy';
 
 @Module({
   imports: [
     UsersModule,
+    PassportModule,
     PrismaModule,
-    JwtModule.register({
-      global: true,
-      secret: process.env.ACCESS_TOKEN,
-      signOptions: {
-        expiresIn: '60s'
-      }
-    })
+    JwtModule.register({global: true})
   ],
   controllers: [AuthController],
-  providers: [AuthService,
-    //SET AUTHGUARD AS A GLOBAL GUARD FOR ALL ENDPOINT
+  providers: [AuthService, LocalStrategy, JwtStrategy, JwtRefreshStrategy
+    /* //SET AUTHGUARD AS A GLOBAL GUARD FOR ALL ENDPOINT
     {
       provide: APP_GUARD,
       useClass: AuthGuard,
-    }
+    } */
   ],
 })
 export class AuthModule { }

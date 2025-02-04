@@ -14,6 +14,7 @@ async function generateUsers() {
                 email: faker.internet.email(),
                 password: faker.internet.password(),
                 role: "USER",
+                refreshToken: "",
                 trips: {
                     create: Array.from({ length: 3 }, () => ({
                         title: faker.lorem.words(3),
