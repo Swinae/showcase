@@ -34,6 +34,7 @@ export function SignInPage() {
         onSubmit: async values => {
             try {
                 const userExist = await SignIn(values)
+                console.log('user:', userExist)
                 if (userExist !== undefined) {
                     console.log('user exist');
                     navigate("/mytrips")

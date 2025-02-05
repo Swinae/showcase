@@ -1,8 +1,12 @@
-import { user } from "../fakers/userFaker";
-/* import useApi from "../hooks/useAPI"; */
+import { useApi } from "../hooks/useAPI";
 import { SignInData } from "../interfaces/SingIn";
 
-export async function SignIn(userSigninData: SignInData) {
-    const userInfo = user.find((user) => user.email === userSigninData.email && user.password === userSigninData.password)
-    return userInfo ? 'Incorrect email or password' : userInfo
+
+const api = useApi()
+
+export async function SignIn(userCredentials: SignInData) {
+    const { data } = await api.post('auth/signin', userCredentials)
+    console.log(data)
+
+    return data
 }
