@@ -1,16 +1,13 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { PrismaService } from 'prisma/prisma.service';
 import * as bcrypt from 'bcrypt'
 import { RegisterAuthDto } from './dto/register-auth.dto';
-import { SigninAuthDto } from './dto/signin-auth.dto';
 import { UsersService } from 'src/users/users.service';
 
 @Injectable()
 export class AuthService {
     constructor(
         private readonly jwtService: JwtService,
-        private readonly prisma: PrismaService,
         private readonly usersService: UsersService,
     ) { }
 

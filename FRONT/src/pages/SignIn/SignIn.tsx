@@ -33,10 +33,9 @@ export function SignInPage() {
         validationSchema: signInSchema,
         onSubmit: async values => {
             try {
-                const userExist = await SignIn(values)
-                console.log('user:', userExist)
-                if (userExist !== undefined) {
-                    console.log('user exist');
+                const user = await SignIn(values)
+                console.log(user)
+                if (user !== undefined) {
                     navigate("/mytrips")
 
                 } else {
