@@ -15,7 +15,7 @@ export class JwtRefreshStrategy extends PassportStrategy(Strategy, 'jwt-refresh'
     }
 
     async validate(req: any, payload: any) {
-        const refreshToken = req.body.refreshToken;
+        const refreshToken = req.cookie?.refreshToken;
         const user = await this.user.findById(payload.sub);
         const isMatchingToken = await this.authService.compareRefreshToken(refreshToken, user.refreshToken)
 

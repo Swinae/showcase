@@ -5,7 +5,11 @@ import { User } from '@prisma/client';
 import { Public } from 'src/common/decorators/public.decorator';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AuthGuard } from '@nestjs/passport';
-import { Response } from 'express';
+import { Request as Req, Response } from 'express';
+
+export interface RequestWithUser extends Req {
+    user: User;
+}
 
 @Controller('auth')
 export class AuthController {
@@ -21,25 +25,11 @@ export class AuthController {
 
     @UseGuards(LocalAuthGuard)
     @Post('signin')
-    async signIn(@Request() req, @Res() res: Response): Promise<any> {
+    async signIn(@Request() req: RequestWithUser, @Res() res: Response): Promise<any> {
         try {
-            console.log(req.user);
-            
-            const { access_token, refresh_token } = await this.authService.signIn(req.user)
-
-            res.cookie('accessToken', access_token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',  // Only send over HTTPS in production
-                sameSite: 'strict',  // Protects against CSRF
-                maxAge: 15 * 60 * 1000,  // 15 minutes
-            });
-
-            res.cookie('refreshToken', refresh_token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'strict',
-                maxAge: 7 * 24 * 60 * 60 * 1000,  // 7 days
-            });
+            const { accessToken, refreshToken } = await this.authService.genAuthTokens(req.user)
+            await this.authService.setAuthCookies(accessToken, refreshToken, res)
+            await this.authService.signIn(req.user, refreshToken)
 
             return res.status(200).json({ message: 'Logged in successfully' });
 
@@ -47,16 +37,14 @@ export class AuthController {
             console.error('SignIn Error:', error);  // Log the error to the console
             return res.status(500).json({ message: 'Internal Server Error', error: error.message });
         }
-
-
-
     }
 
     @Post('refresh')
     @UseGuards(AuthGuard('jwt-refresh'))
-    async refresh(@Request() req) {
+    async refresh(@Request() req: RequestWithUser, @Res() res: Response) {
         const user = req.user;  // The validated user from the refresh token
-        return this.authService.signIn(user);  // Issue new access and refresh tokens
+        const accessToken = await this.authService.genAccessToken(user)
+        return this.authService.setAccessCookie(accessToken, res);  // Issue new access and refresh tokens
     }
 }
 
