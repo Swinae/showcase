@@ -5,7 +5,7 @@ import { PrismaService } from 'prisma/prisma.service';
 
 @Injectable()
 export class TripsService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
 
   create(createTripDto: CreateTripDto) {
@@ -13,7 +13,7 @@ export class TripsService {
   }
 
   async findUserTrips(userId: string) {
-    return this.prisma.trip.findMany({
+    return await this.prisma.trip.findMany({
       where: {
         authorId: userId
       }

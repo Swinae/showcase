@@ -3,9 +3,10 @@ import { getUserTrips } from "../../services/api/Trips"
 import { TripCard } from "../../components/Cards/TripCard";
 import { css } from '@emotion/react';
 import { ButtonType3 } from "../../components/Buttons/ButtonType3";
+import { Trip } from "../../services/interfaces/Trip";
 
 export function MytripsPage() {
-    const [trips, setTrips] = useState([])
+    const [trips, setTrips] = useState<Trip[]>([])
 
     useEffect(() => {
         async function loadTrips() {

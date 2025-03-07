@@ -1,9 +1,12 @@
 import {tripFaker} from '../fakers/tripFaker'
 import { Trip } from '../interfaces/Trip'
+import { useApi } from '../hooks/useAPI'
 
-export async function getUserTrips(): Promise<any> {
-    const tripList = tripFaker
-    return tripList
+const api = useApi()
+
+export async function getUserTrips(): Promise<Trip[]> {
+    let {data} = await api.get('/mytrips')
+    return data
 }
 
 export async function getTripInfo(id: number): Promise<Trip> {

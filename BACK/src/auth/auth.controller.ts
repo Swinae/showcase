@@ -6,10 +6,8 @@ import { Public } from 'src/common/decorators/public.decorator';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { AuthGuard } from '@nestjs/passport';
 import { Request as Req, Response } from 'express';
-
-export interface RequestWithUser extends Req {
-    user: User;
-}
+import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
+import { RequestWithUser } from 'src/common/interfaces/RequestWithUser';
 
 @Controller('auth')
 export class AuthController {
@@ -34,13 +32,13 @@ export class AuthController {
             return res.status(200).json({ message: 'Logged in successfully' });
 
         } catch (error) {
-            console.error('SignIn Error:', error);  // Log the error to the console
+            console.error('SignIn Error:', error);
             return res.status(500).json({ message: 'Internal Server Error', error: error.message });
         }
     }
 
     @Post('refresh')
-    @UseGuards(AuthGuard('jwt-refresh'))
+    @UseGuards(JwtRefreshGuard)
     async refresh(@Request() req: RequestWithUser, @Res() res: Response) {
         const user = req.user;  // The validated user from the refresh token
         const accessToken = await this.authService.genAccessToken(user)
